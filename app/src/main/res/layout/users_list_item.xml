@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/person_image"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/full_name_tv"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="38dp"
+        android:fontFamily="@font/inter_semibold"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="1sp"
+        android:textAppearance="@style/title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/person_image"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Алексей Миногаров" />
+
+    <TextView
+        android:id="@+id/meta"
+        android:layout_width="0dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="38dp"
+        android:fontFamily="@font/inter"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="1sp"
+        android:textAppearance="@style/meta"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/full_name_tv"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="mi" />
+
+    <TextView
+        android:id="@+id/position"
+        android:layout_width="0dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="19dp"
+        android:fontFamily="@font/inter"
+        android:gravity="top"
+        android:textAppearance="@style/subtitle"
+        android:textSize="13sp"
+        android:translationY="-0.13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/full_name_tv"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Analyst" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
