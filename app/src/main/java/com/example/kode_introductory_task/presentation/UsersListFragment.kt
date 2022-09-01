@@ -5,14 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.kode_introductory_task.R
+import com.example.kode_introductory_task.data.repository.RepositoryImpl
 import com.example.kode_introductory_task.databinding.FragmentUsersListBinding
 import com.example.kode_introductory_task.domain.Worker
 import com.example.kode_introductory_task.presentation.adapters.PeopleListAdapter
+import kotlinx.coroutines.*
 
 class UsersListFragment : Fragment() {
 
     private lateinit var binding: FragmentUsersListBinding
+    private val repository = RepositoryImpl()
+    private lateinit var internetList: List<Worker>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -24,7 +27,17 @@ class UsersListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val adapter = PeopleListAdapter()
         binding.workersRv.adapter = adapter
-        val list = listOf(
+        val job = Job()
+        val uiScope = CoroutineScope(Dispatchers.Main + job)
+        uiScope.launch(Dispatchers.IO){
+            //asyncOperation
+            internetList = repository.getWorkersList()
+            withContext(Dispatchers.Main){
+                adapter.submitList(internetList)
+            }
+
+        }
+        /*val list = listOf(
             Worker("123", "https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg", "Stepan","Mohov","mi","asd","Senior","asd","asd") ,
             Worker("213", "https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg", "Andrey","Kirov","su","asd","Senior","asd","asd"),
             Worker("4234", "https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg", "Anna","Babina","ru","asd","Devops","asd","asd"),
@@ -35,7 +48,7 @@ class UsersListFragment : Fragment() {
             Worker("346345", "https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg", "Valeriy","Ivanov","ru","asd","Devops","asd","asd"),
             Worker("345435", "https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg", "Dmitriy","Antonov","su","asd","Senior","asd","asd"),
             Worker("234234", "https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg", "Angelina","Kein","to","asd","Middle","asd","asd")
-        )
-        adapter.submitList(list)
+        )*/
+
     }
 }
