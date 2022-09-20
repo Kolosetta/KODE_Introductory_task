@@ -57,8 +57,6 @@
         android:fontFamily="@font/inter"
         android:gravity="top"
         android:textAppearance="@style/subtitle"
-        android:textSize="13sp"
-        android:translationY="-0.13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/full_name_tv"
         app:layout_constraintTop_toTopOf="parent"
