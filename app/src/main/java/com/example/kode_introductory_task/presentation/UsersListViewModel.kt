@@ -8,8 +8,8 @@ import com.example.kode_introductory_task.data.repository.RepositoryImpl
 import com.example.kode_introductory_task.domain.GetWorkersListUseCase
 import com.example.kode_introductory_task.domain.Worker
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class UsersListViewModel : ViewModel() {
 
@@ -21,12 +21,10 @@ class UsersListViewModel : ViewModel() {
         get() = _workersList
 
     init{
-        val deferredWorkers = viewModelScope.async(Dispatchers.IO) {
-            getWorkersListUseCase.invoke()
-        }
-
         viewModelScope.launch(){
-            _workersList.value = deferredWorkers.await()
+            _workersList.value = withContext(Dispatchers.IO){
+                getWorkersListUseCase.invoke()
+            }
         }
     }
 

@@ -15,7 +15,8 @@ class PeopleListAdapter : ListAdapter<Worker, WorkerViewHolder>(WorkersDiffCallB
 
     override fun onBindViewHolder(holder: WorkerViewHolder, position: Int) {
         val worker = getItem(position)
-        holder.binding.fullNameTv.text = StringBuilder(worker.firstName + " ").append(worker.lastName)
+        val fullName = StringBuilder(worker.firstName + " ").append(worker.lastName)
+        holder.binding.fullNameTv.text = fullName
         holder.binding.position.text = worker.position
         holder.binding.meta.text = worker.userTag
         Picasso.get().load(worker.avatarUrl).into(holder.binding.personImage)
