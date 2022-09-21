@@ -8,6 +8,9 @@ import com.example.kode_introductory_task.domain.Worker
 import com.squareup.picasso.Picasso
 
 class PeopleListAdapter : ListAdapter<Worker, WorkerViewHolder>(WorkersDiffCallBack()) {
+
+    var clickListener: ((Worker) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkerViewHolder {
         val binding = UsersListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return WorkerViewHolder(binding)
@@ -20,5 +23,8 @@ class PeopleListAdapter : ListAdapter<Worker, WorkerViewHolder>(WorkersDiffCallB
         holder.binding.position.text = worker.position
         holder.binding.meta.text = worker.userTag
         Picasso.get().load(worker.avatarUrl).into(holder.binding.personImage)
+        holder.binding.root.setOnClickListener {
+            clickListener?.invoke(worker)
+        }
     }
 }

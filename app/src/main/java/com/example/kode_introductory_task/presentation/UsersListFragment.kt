@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.example.kode_introductory_task.DetailInfoFragment
+import com.example.kode_introductory_task.R
 import com.example.kode_introductory_task.databinding.FragmentUsersListBinding
 import com.example.kode_introductory_task.presentation.adapters.PeopleListAdapter
 
@@ -28,6 +30,13 @@ class UsersListFragment : Fragment() {
         binding.workersRv.adapter = adapter
         viewModel.workersList.observe(viewLifecycleOwner){
             adapter.submitList(it)
+        }
+
+        adapter.clickListener = {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.main_fragment_container, DetailInfoFragment.newInstance(it))
+                .addToBackStack(null)
+                .commit()
         }
     }
 }
