@@ -6,7 +6,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Worker(
     val id: String,
-    val avatarUrl: String,
+    //TODO заменить на val, когда починят ссылки на сервере
+    var avatarUrl: String,
     val firstName: String,
     val lastName: String,
     val userTag: String,

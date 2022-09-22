@@ -2,9 +2,11 @@ package com.example.kode_introductory_task.presentation
 
 import android.icu.text.DateFormat
 import android.icu.text.SimpleDateFormat
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.kode_introductory_task.R
+import com.squareup.picasso.Picasso
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter
@@ -50,4 +52,9 @@ fun bindPhoneNumber(textView: TextView, number: String) {
         textView.context.getString(R.string.phone_sample),
         number
     )
+}
+
+@BindingAdapter("personImage")
+fun bindPersonImage(imageView: ImageView, url: String) {
+    Picasso.get().load(url).into(imageView)
 }

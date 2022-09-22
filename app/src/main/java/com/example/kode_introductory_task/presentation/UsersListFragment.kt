@@ -28,8 +28,12 @@ class UsersListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val adapter = PeopleListAdapter()
         binding.workersRv.adapter = adapter
-        viewModel.workersList.observe(viewLifecycleOwner){
-            adapter.submitList(it)
+        viewModel.workersList.observe(viewLifecycleOwner){ list ->
+            //Временная заглушка для фото, пока сломаны ссылки
+            list.map{
+                it.avatarUrl = "https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg"
+            }
+            adapter.submitList(list)
         }
 
         adapter.clickListener = {
