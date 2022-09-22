@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="back_button">Back Button</string>
+    <string name="year_sample">%s год</string>
+    <string name="years_sample">%s года</string>
+    <string name="lots_of_years_sample">%s лет</string>
+    <string name="phone_sample">+7 %s</string>
 </resources>

@@ -1,5 +1,9 @@
 package com.example.kode_introductory_task.domain
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Worker(
     val id: String,
     val avatarUrl: String,
@@ -10,4 +14,4 @@ data class Worker(
     val position: String,
     val birthday: String,
     val phone: String
-)
+) : Parcelable
