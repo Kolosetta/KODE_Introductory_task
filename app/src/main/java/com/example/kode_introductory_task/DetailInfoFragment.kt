@@ -1,5 +1,7 @@
 package com.example.kode_introductory_task
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,33 +23,29 @@ class DetailInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.worker = requireArguments().getParcelable(WORKER_INFO)
-        requireArguments().getParcelable<Worker>(WORKER_INFO)?.let {
-            /*binding.fullNameTv.text = StringBuilder(it.firstName+ " ").append(it.lastName)
-            binding.meta.text = it.userTag
-            binding.position.text = it.position
-            binding.phoneNumber.text = it.phone
+        val worker = requireArguments().getParcelable<Worker>(WORKER_INFO)
+        binding.worker = worker
+        setOnClickListeners(worker)
+    }
 
-            val birthDate = it.birthday
-            val simpleFormatter = SimpleDateFormat("yyyy-MM-dd").parse(birthDate)
-            val textDate = DateFormat.getDateInstance(SimpleDateFormat.LONG,  Locale("ru"))
-                .format(simpleFormatter)
-            binding.birthDate.text = textDate
+    private fun setOnClickListeners(worker: Worker?){
+        binding.phoneLayout.setOnClickListener {
+            val uri = String.format(
+                getString(R.string.intent_phone_sample),
+                worker?.phone
+            )
+            val intent = Intent(Intent.ACTION_DIAL).apply {
+                data =  Uri.parse(uri)
+            }
+            startActivity(intent)
+        }
+        binding.backButton.setOnClickListener{
+            //TODO Добавить анимацию нажатия
+            //val animAlpha = AnimationUtils.loadAnimation(requireContext(), android.R.anim.fade_in);
+            //it.startAnimation(animAlpha)
+            //TODO Добавить анимации переходов
+            requireActivity().supportFragmentManager.popBackStack()
 
-            val periodFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-            val period = Period.between(LocalDate.parse(birthDate, periodFormatter), LocalDate.now())
-            binding.age.text = period.years.toString()*/
-
-           /* val birthDate = it.birthday
-
-            val df = android.icu.text.DateFormat.getDateInstance(DateFormat.YEAR_FIELD)
-            val simpleFormatter = df.parse(birthDate)
-            val textDate = android.icu.text.DateFormat.getDateInstance(DateFormat.LONG,  Locale("ru"))
-                .format(simpleFormatter)
-            binding.birthDate.text = textDate
-
-            val pattern = "MM-dd-yyyy"
-            val simpleDateFormat = SimpleDateFormat(pattern)*/
         }
     }
 

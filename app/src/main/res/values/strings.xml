@@ -8,5 +8,6 @@
     <string name="years_sample">%s года</string>
     <string name="lots_of_years_sample">%s лет</string>
     <string name="phone_sample">+7 %s</string>
+    <string name="intent_phone_sample">tel: +7 %s</string>
 
 </resources>
