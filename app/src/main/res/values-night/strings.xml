@@ -5,4 +5,18 @@
     <string name="years_sample">%s года</string>
     <string name="lots_of_years_sample">%s лет</string>
     <string name="phone_sample">+7 %s</string>
+    <string name="all">Все</string>
+    <string name="designers">Designers</string>
+    <string name="analysts">Analysts</string>
+    <string name="managers">Managers</string>
+    <string name="ios">iOS</string>
+    <string name="android">Android</string>
+    <string name="qa">QA</string>
+    <string name="back_office">Back Office</string>
+    <string name="frontend">Frontend</string>
+    <string name="hr">HR</string>
+    <string name="pr">PR</string>
+    <string name="backend">Backend</string>
+    <string name="support">Support</string>
+    <string name="input_hint">Введи имя, тег, почту...</string>
 </resources>
