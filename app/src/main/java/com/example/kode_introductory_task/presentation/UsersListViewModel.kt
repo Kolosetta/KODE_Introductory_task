@@ -28,4 +28,11 @@ class UsersListViewModel : ViewModel() {
         }
     }
 
+    //TODO переписать механизм
+    fun getNewList(department: String){
+        _workersList.value = _workersList.value?.filter {
+            it.department == department
+        }
+    }
+
 }
