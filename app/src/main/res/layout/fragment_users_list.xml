@@ -16,7 +16,7 @@
         android:paddingHorizontal="14dp"
         android:drawablePadding="12dp"
         android:background="@drawable/custom_input"
-        android:hint="Введи имя, тег, почту..."
+        android:hint="@string/input_hint"
         style="@style/title"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
