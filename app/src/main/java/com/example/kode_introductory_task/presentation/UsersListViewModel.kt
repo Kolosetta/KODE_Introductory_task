@@ -15,24 +15,24 @@ class UsersListViewModel : ViewModel() {
 
     private val repository = RepositoryImpl()
     private val getWorkersListUseCase = GetWorkersListUseCase(repository)
+    private lateinit var workers: List<Worker>
 
     private val _workersList = MutableLiveData<List<Worker>>()
     val workersList: LiveData<List<Worker>>
         get() = _workersList
 
     init{
-        viewModelScope.launch(){
-            _workersList.value = withContext(Dispatchers.IO){
+        viewModelScope.launch{
+            workers = withContext(Dispatchers.IO){
                 getWorkersListUseCase.invoke()
             }
+            _workersList.value = workers
         }
     }
 
-    //TODO переписать механизм
-    fun getNewList(department: String){
-        _workersList.value = _workersList.value?.filter {
-            it.department == department
+    fun getWorkersByDepartment(department: String){
+        _workersList.value = workers.filter {
+            it.department.contains(department)
         }
     }
-
 }

@@ -46,15 +46,23 @@ class UsersListFragment : Fragment() {
                 .commit()
         }
 
-        //TODO дописать реализацию
+
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab?.text){
-                    "Designers" -> viewModel.getNewList("design")
-                    "Android" -> viewModel.getNewList("android")
-                    "Analytics" -> viewModel.getNewList("analytics")
-                    "HR" -> viewModel.getNewList("hr")
-                    //"Главная" -> { startMainListFragment() }
+                    "Android" -> viewModel.getWorkersByDepartment("android")
+                    "iOS" -> viewModel.getWorkersByDepartment("ios")
+                    "Designers" -> viewModel.getWorkersByDepartment("design")
+                    "Managers" -> viewModel.getWorkersByDepartment("management")
+                    "QA" -> viewModel.getWorkersByDepartment("qa")
+                    "Analysts" -> viewModel.getWorkersByDepartment("analytics")
+                    "Back Office" -> viewModel.getWorkersByDepartment("back_office")
+                    "Frontend" -> viewModel.getWorkersByDepartment("frontend")
+                    "HR" -> viewModel.getWorkersByDepartment("hr")
+                    "PR" -> viewModel.getWorkersByDepartment("pr")
+                    "Backend" -> viewModel.getWorkersByDepartment("backend")
+                    "Support" -> viewModel.getWorkersByDepartment("support")
+                    "Все" -> viewModel.getWorkersByDepartment("")
                 }
             }
 
