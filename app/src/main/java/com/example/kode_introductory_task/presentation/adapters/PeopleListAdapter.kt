@@ -2,12 +2,14 @@ package com.example.kode_introductory_task.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.ListAdapter
 import com.example.kode_introductory_task.databinding.UsersListItemBinding
 import com.example.kode_introductory_task.domain.Worker
 import com.squareup.picasso.Picasso
 
-class PeopleListAdapter : ListAdapter<Worker, WorkerViewHolder>(WorkersDiffCallBack()) {
+class PeopleListAdapter : ListAdapter<Worker, WorkerViewHolder>(WorkersDiffCallBack()), Filterable {
 
     var clickListener: ((Worker) -> Unit)? = null
 
@@ -25,6 +27,20 @@ class PeopleListAdapter : ListAdapter<Worker, WorkerViewHolder>(WorkersDiffCallB
         Picasso.get().load(worker.avatarUrl).into(holder.binding.personImage)
         holder.binding.root.setOnClickListener {
             clickListener?.invoke(worker)
+        }
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter(){
+            //Работает в фоновом потоке
+            override fun performFiltering(p0: CharSequence?): FilterResults {
+                TODO("Not yet implemented")
+            }
+
+            //Работает в UI потоке
+            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+                TODO("Not yet implemented")
+            }
         }
     }
 }

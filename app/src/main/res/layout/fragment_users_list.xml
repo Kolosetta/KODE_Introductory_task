@@ -6,35 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".presentation.UsersListFragment">
 
-    <EditText
-        android:id="@+id/text_input_layout"
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edit_text_name"
+        style="@style/title"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="10dp"
-        android:drawableStart="@drawable/ic_loupe"
-        android:paddingHorizontal="14dp"
-        android:drawablePadding="12dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/ic_loupe"
+        android:drawablePadding="12dp"
         android:hint="@string/input_hint"
-        style="@style/title"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingHorizontal="14dp"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
+        style="@style/customTabLayout"
         android:layout_width="0dp"
         android:layout_height="44dp"
         android:layout_marginTop="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_input_layout"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_name"
         app:tabIndicatorColor="@color/purple_500"
         app:tabIndicatorHeight="3dp"
         app:tabMode="auto"
-        style="@style/customTabLayout"
         app:tabTextColor="#97979B">
 
         <com.google.android.material.tabs.TabItem
@@ -123,4 +124,4 @@
         app:layout_constraintTop_toBottomOf="@id/tab_layout"
         tools:listitem="@layout/users_list_item" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
