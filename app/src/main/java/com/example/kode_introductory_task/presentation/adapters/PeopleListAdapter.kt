@@ -12,9 +12,11 @@ import com.squareup.picasso.Picasso
 class PeopleListAdapter : ListAdapter<Worker, WorkerViewHolder>(WorkersDiffCallBack()), Filterable {
 
     var clickListener: ((Worker) -> Unit)? = null
+    lateinit var fullList: List<Worker>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkerViewHolder {
-        val binding = UsersListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            UsersListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return WorkerViewHolder(binding)
     }
 
@@ -30,16 +32,34 @@ class PeopleListAdapter : ListAdapter<Worker, WorkerViewHolder>(WorkersDiffCallB
         }
     }
 
+    //Обновляет текущий список, либо текущий и список всей вкладки
+    fun submitList(list: List<Worker>?, updateFullList: Boolean) {
+        super.submitList(list)
+        if (updateFullList && !list.isNullOrEmpty()) {
+            fullList = list
+        }
+    }
+
     override fun getFilter(): Filter {
-        return object : Filter(){
+        return object : Filter() {
             //Работает в фоновом потоке
-            override fun performFiltering(p0: CharSequence?): FilterResults {
-                TODO("Not yet implemented")
-            }
+            override fun performFiltering(searchingStr: CharSequence?) =
+                searchingStr?.let {
+                    FilterResults().apply {
+                        values = fullList.filter {
+                            it.firstName.lowercase().contains((searchingStr as String).lowercase()) ||
+                                    it.lastName.lowercase().contains(searchingStr.lowercase())
+                        }
+                    }
+                } ?: FilterResults().apply {
+                    values = fullList
+                }
+
 
             //Работает в UI потоке
-            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
-                TODO("Not yet implemented")
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(p0: CharSequence?, results: FilterResults?) {
+                submitList(results?.values as List<Worker>, false)
             }
         }
     }

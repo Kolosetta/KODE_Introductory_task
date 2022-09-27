@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.kode_introductory_task.DetailInfoFragment
 import com.example.kode_introductory_task.R
 import com.example.kode_introductory_task.databinding.FragmentUsersListBinding
-import com.example.kode_introductory_task.domain.Worker
 import com.example.kode_introductory_task.presentation.adapters.PeopleListAdapter
 import com.google.android.material.tabs.TabLayout
 
@@ -21,7 +20,6 @@ class UsersListFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider(this)[UsersListViewModel::class.java]
     }
-    private lateinit var workersList: List<Worker>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -38,7 +36,7 @@ class UsersListFragment : Fragment() {
             list.map{
                 it.avatarUrl = "https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg"
             }
-            adapter.submitList(list)
+            adapter.submitList(list, true)
         }
 
         adapter.clickListener = {
@@ -77,12 +75,11 @@ class UsersListFragment : Fragment() {
         binding.editTextName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-            override fun afterTextChanged(p0: Editable?) {
-                adapter.filter.filter(p0)
+            override fun afterTextChanged(searhingStr: Editable?) {
+                adapter.filter.filter(searhingStr)
             }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         })
     }
 }
