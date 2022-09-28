@@ -19,4 +19,5 @@
     <string name="backend">Backend</string>
     <string name="support">Support</string>
     <string name="input_hint">Введи имя, тег, почту...</string>
+    <string name="cancel_btn">Отмена</string>
 </resources>

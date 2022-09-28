@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toStartOf="@id/cancel_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:inputType="textPersonName" />
+        android:inputType="text" />
     
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancel_button"

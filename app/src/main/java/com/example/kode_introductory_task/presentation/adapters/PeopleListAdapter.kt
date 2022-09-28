@@ -47,8 +47,8 @@ class PeopleListAdapter : ListAdapter<Worker, WorkerViewHolder>(WorkersDiffCallB
                 searchingStr?.let {
                     FilterResults().apply {
                         values = fullList.filter {
-                            it.firstName.lowercase().contains((searchingStr as String).lowercase()) ||
-                                    it.lastName.lowercase().contains(searchingStr.lowercase())
+                            StringBuilder(it.firstName + " ").append(it.lastName).toString()
+                                .lowercase().contains((searchingStr as String).lowercase().trim())
                         }
                     }
                 } ?: FilterResults().apply {

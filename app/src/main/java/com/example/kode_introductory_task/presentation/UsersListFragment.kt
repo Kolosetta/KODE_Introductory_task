@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.kode_introductory_task.DetailInfoFragment
@@ -24,7 +25,8 @@ class UsersListFragment : Fragment() {
         ViewModelProvider(this)[UsersListViewModel::class.java]
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentUsersListBinding.inflate(inflater, container, false)
         return binding.root
@@ -35,10 +37,11 @@ class UsersListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val adapter = PeopleListAdapter()
         binding.workersRv.adapter = adapter
-        viewModel.workersList.observe(viewLifecycleOwner){ list ->
+        viewModel.workersList.observe(viewLifecycleOwner) { list ->
             //Временная заглушка для фото, пока сломаны ссылки
-            list.map{
-                it.avatarUrl = "https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg"
+            list.map {
+                it.avatarUrl =
+                    "https://shapka-youtube.ru/wp-content/uploads/2021/02/prikolnaya-avatarka-dlya-patsanov.jpg"
             }
             adapter.submitList(list, true)
         }
@@ -51,9 +54,9 @@ class UsersListFragment : Fragment() {
         }
 
 
-        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                when(tab?.text){
+                when (tab?.text) {
                     "Android" -> viewModel.getWorkersByDepartment("android")
                     "iOS" -> viewModel.getWorkersByDepartment("ios")
                     "Designers" -> viewModel.getWorkersByDepartment("design")
@@ -86,17 +89,21 @@ class UsersListFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         })
 
-        binding.editTextName.setOnFocusChangeListener { _, _ ->
+        binding.editTextName.setOnFocusChangeListener { view, isFocused ->
             binding.cancelButton.visibility = View.VISIBLE
+            when(isFocused) {
+                true -> (view as EditText).hint = ""
+                false -> (view as EditText).hint = getString(R.string.input_hint)
+            }
         }
 
-        binding.cancelButton.setOnClickListener{
+        binding.cancelButton.setOnClickListener {
             binding.editTextName.clearFocus()
             binding.editTextName.setText("")
             it.visibility = View.GONE
             //Keyboard Hiding
-            val imm =
-                requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm = requireContext()
+                .getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
