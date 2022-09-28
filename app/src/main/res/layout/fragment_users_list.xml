@@ -7,22 +7,39 @@
     tools:context=".presentation.UsersListFragment">
 
 
-
-    <com.google.android.material.textfield.TextInputEditText
+    <EditText
         android:id="@+id/edit_text_name"
         style="@style/title"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/ic_loupe"
         android:drawablePadding="12dp"
         android:hint="@string/input_hint"
         android:paddingHorizontal="14dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/cancel_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:inputType="textPersonName" />
+    
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@null"
+        android:paddingEnd="28dp"
+        android:textAllCaps="false"
+        android:text="@string/cancel_btn"
+        android:textColor="#6534FF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edit_text_name"
+        app:layout_constraintBottom_toBottomOf="@id/edit_text_name"
+        app:layout_constraintStart_toEndOf="@id/edit_text_name"
+        android:visibility="gone"
+        tools:ignore="RtlSymmetry" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
