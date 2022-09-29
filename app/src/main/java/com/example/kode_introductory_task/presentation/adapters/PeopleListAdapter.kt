@@ -58,8 +58,10 @@ class PeopleListAdapter : ListAdapter<Worker, WorkerViewHolder>(WorkersDiffCallB
 
             //Работает в UI потоке
             @Suppress("UNCHECKED_CAST")
-            override fun publishResults(p0: CharSequence?, results: FilterResults?) {
-                submitList(results?.values as List<Worker>, false)
+            override fun publishResults(p0: CharSequence?, results: FilterResults) {
+                results.values?.let {
+                    submitList(results.values as List<Worker>, false)
+                } ?: submitList(fullList, false)
             }
         }
     }
