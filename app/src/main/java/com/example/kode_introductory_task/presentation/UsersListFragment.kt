@@ -82,14 +82,14 @@ class UsersListFragment : Fragment() {
         binding.editTextName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-            override fun afterTextChanged(searhingStr: Editable?) {
-                adapter.filter.filter(searhingStr)
-            }
+            override fun afterTextChanged(searhingStr: Editable?) {}
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(searhingStr: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    adapter.filter.filter(searhingStr.toString())
+            }
         })
 
-        binding.editTextName.setOnFocusChangeListener { view, isFocused ->
+        binding.editTextName.setOnFocusChangeListener { _, isFocused ->
             binding.cancelButton.visibility = View.VISIBLE
             when(isFocused) {
                 true -> (view as EditText).hint = ""

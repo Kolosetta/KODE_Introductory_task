@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso
 class PeopleListAdapter : ListAdapter<Worker, WorkerViewHolder>(WorkersDiffCallBack()), Filterable {
 
     var clickListener: ((Worker) -> Unit)? = null
-    lateinit var fullList: List<Worker>
+    var fullTabList: List<Worker>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkerViewHolder {
         val binding =
@@ -36,7 +36,7 @@ class PeopleListAdapter : ListAdapter<Worker, WorkerViewHolder>(WorkersDiffCallB
     fun submitList(list: List<Worker>?, updateFullList: Boolean) {
         super.submitList(list)
         if (updateFullList && !list.isNullOrEmpty()) {
-            fullList = list
+            fullTabList = list
         }
     }
 
@@ -46,13 +46,13 @@ class PeopleListAdapter : ListAdapter<Worker, WorkerViewHolder>(WorkersDiffCallB
             override fun performFiltering(searchingStr: CharSequence?) =
                 searchingStr?.let {
                     FilterResults().apply {
-                        values = fullList.filter {
+                        values = fullTabList?.filter {
                             StringBuilder(it.firstName + " ").append(it.lastName).toString()
                                 .lowercase().contains((searchingStr as String).lowercase().trim())
                         }
                     }
                 } ?: FilterResults().apply {
-                    values = fullList
+                    values = fullTabList
                 }
 
 
@@ -60,8 +60,10 @@ class PeopleListAdapter : ListAdapter<Worker, WorkerViewHolder>(WorkersDiffCallB
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(p0: CharSequence?, results: FilterResults) {
                 results.values?.let {
-                    submitList(results.values as List<Worker>, false)
-                } ?: submitList(fullList, false)
+                        submitList(results.values as List<Worker>, false)
+                } ?: fullTabList?.let {
+                    submitList(fullTabList, false)
+                }
             }
         }
     }
