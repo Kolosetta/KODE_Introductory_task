@@ -48,7 +48,7 @@ class UsersListFragment : Fragment() {
 
         adapter.clickListener = {
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.main_fragment_container, DetailInfoFragment.newInstance(it))
+                .add(R.id.main_fragment_container, DetailInfoFragment.newInstance(it))
                 .addToBackStack(null)
                 .commit()
         }
@@ -71,6 +71,7 @@ class UsersListFragment : Fragment() {
                     "Support" -> viewModel.getWorkersByDepartment("support")
                     "Все" -> viewModel.getWorkersByDepartment("")
                 }
+                //tab?.t
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -89,7 +90,7 @@ class UsersListFragment : Fragment() {
             }
         })
 
-        binding.editTextName.setOnFocusChangeListener { _, isFocused ->
+        binding.editTextName.setOnFocusChangeListener { view, isFocused ->
             binding.cancelButton.visibility = View.VISIBLE
             when(isFocused) {
                 true -> (view as EditText).hint = ""
